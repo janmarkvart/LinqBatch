@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using LinqBatch;
 
 namespace LinqBatchTests
@@ -6,6 +7,7 @@ namespace LinqBatchTests
     public class SelectTests
     {
         int[][] intBatches;
+        List<List<int>> listIntBatches;
         string[][] stringBatches;
         object[][] emptyBatches;
         object[][] emptyTopArray;
@@ -15,6 +17,9 @@ namespace LinqBatchTests
             int[] a = [1, 2, 3];
             int[] b = [4, 5, 6];
             intBatches = [a, b];
+            List<int> lia = new(a);
+            List<int> lib = new(b);
+            listIntBatches = [lia, lib];
             string[] stringa = ["apple", "orange", "pear"];
             string[] stringb = ["car", "bike", "train"];
             stringBatches = [stringa, stringb];
@@ -29,6 +34,8 @@ namespace LinqBatchTests
         {
             var res = from x in intBatches select x;
             Assert.That(res, Is.EqualTo(intBatches));
+            var res2 = from x in listIntBatches select x;
+            Assert.That(res2, Is.EqualTo(intBatches));
         }
 
         [Test]
