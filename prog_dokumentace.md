@@ -1,0 +1,3 @@
+úvod a motivace - proč, proč se metody jmenujou jinak (konflikt signatury)
+
+popis detailu operací 1,2,3,4,5...
