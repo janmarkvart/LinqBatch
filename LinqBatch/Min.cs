@@ -11,7 +11,12 @@ namespace LinqBatch
         public static int TotalMin(this IEnumerable<IEnumerable<int>> input) => TotalMinBinary(input);
         public static long TotalMin(this IEnumerable<IEnumerable<long>> input) => TotalMinBinary(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds minimum of input collection - variant for integers
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> minimum across all batches </returns>
         public static T TotalMinBinary<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IBinaryInteger<T>
         {
@@ -25,8 +30,13 @@ namespace LinqBatch
 
         public static double TotalMin(this IEnumerable<IEnumerable<double>> input) => TotalMinFloating(input);
         public static float TotalMin(this IEnumerable<IEnumerable<float>> input) => TotalMinFloating(input);
-        
-        //TODO: comments
+
+        /// <summary>
+        /// Finds minimum of input collection - variant for floating points
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> minimum across all batches </returns>
         public static T TotalMinFloating<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IFloatingPointIeee754<T>
         {
@@ -41,7 +51,12 @@ namespace LinqBatch
         public static IEnumerable<int> BatchMin(this IEnumerable<IEnumerable<int>> input) => BatchMinBinary(input);
         public static IEnumerable<long> BatchMin(this IEnumerable<IEnumerable<long>> input) => BatchMinBinary(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds minimum of each batch - variant for integers
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> minimum for each batch </returns>
         public static IEnumerable<T> BatchMinBinary<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IBinaryInteger<T>
         {
@@ -59,7 +74,12 @@ namespace LinqBatch
         public static IEnumerable<double> BatchMin(this IEnumerable<IEnumerable<double>> input) => BatchMinFloating(input);
         public static IEnumerable<float> BatchMin(this IEnumerable<IEnumerable<float>> input) => BatchMinFloating(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds minimum of each batch - variant for floating points
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> minimum for each batch </returns>
         public static IEnumerable<T> BatchMinFloating<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IFloatingPointIeee754<T>
         {

@@ -11,7 +11,12 @@ namespace LinqBatch
         public static int TotalSum(this IEnumerable<IEnumerable<int>> input) => TotalSumBinary(input);
         public static long TotalSum(this IEnumerable<IEnumerable<long>> input) => TotalSumBinary(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds sum of input collection - variant for integers
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> sum across all batches </returns>
         public static T TotalSumBinary<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IBinaryInteger<T>
         {
@@ -29,7 +34,12 @@ namespace LinqBatch
         public static double TotalSum(this IEnumerable<IEnumerable<double>> input) => TotalSumFloating(input);
         public static float TotalSum(this IEnumerable<IEnumerable<float>> input) => TotalSumFloating(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds sum of input collection - variant for floating points
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> sum across all batches </returns>
         public static T TotalSumFloating<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IFloatingPointIeee754<T>
         {
@@ -47,7 +57,12 @@ namespace LinqBatch
         public static IEnumerable<int> BatchSum(this IEnumerable<IEnumerable<int>> input) => BatchSumBinary(input);
         public static IEnumerable<long> BatchSum(this IEnumerable<IEnumerable<long>> input) => BatchSumBinary(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds sum of each batch - variant for integers
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> sum for each batch </returns>
         public static IEnumerable<T> BatchSumBinary<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IBinaryInteger<T>
         {
@@ -72,7 +87,12 @@ namespace LinqBatch
         public static IEnumerable<double> BatchSum(this IEnumerable<IEnumerable<double>> input) => BatchSumFloating(input);
         public static IEnumerable<float> BatchSum(this IEnumerable<IEnumerable<float>> input) => BatchSumFloating(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds sum of each batch - variant for floating points
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> sum for each batch </returns>
         public static IEnumerable<T> BatchSumFloating<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IFloatingPointIeee754<T>
         {

@@ -11,7 +11,12 @@ namespace LinqBatch
         public static int TotalMax(this IEnumerable<IEnumerable<int>> input) => TotalMaxBinary(input);
         public static long TotalMax(this IEnumerable<IEnumerable<long>> input) => TotalMaxBinary(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds maximum of input collection - variant for integers
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> maximum across all batches </returns>
         public static T TotalMaxBinary<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IBinaryInteger<T>
         {
@@ -26,7 +31,12 @@ namespace LinqBatch
         public static double TotalMax(this IEnumerable<IEnumerable<double>> input) => TotalMaxFloating(input);
         public static float TotalMax(this IEnumerable<IEnumerable<float>> input) => TotalMaxFloating(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds maximum of input collection - variant for floating points
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> maximum across all batches </returns>
         public static T TotalMaxFloating<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IFloatingPointIeee754<T>
         {
@@ -41,7 +51,12 @@ namespace LinqBatch
         public static IEnumerable<int> BatchMax(this IEnumerable<IEnumerable<int>> input) => BatchMaxBinary(input);
         public static IEnumerable<long> BatchMax(this IEnumerable<IEnumerable<long>> input) => BatchMaxBinary(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds maximum of each batch - variant for integers
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> maximum for each batch </returns>
         public static IEnumerable<T> BatchMaxBinary<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IBinaryInteger<T>
         {
@@ -59,7 +74,12 @@ namespace LinqBatch
         public static IEnumerable<double> BatchMax(this IEnumerable<IEnumerable<double>> input) => BatchMaxFloating(input);
         public static IEnumerable<float> BatchMax(this IEnumerable<IEnumerable<float>> input) => BatchMaxFloating(input);
 
-        //TODO: comments
+        /// <summary>
+        /// Finds maximum of each batch - variant for floating points
+        /// </summary>
+        /// <typeparam name="T"> generic type of input </typeparam>
+        /// <param name="input"> input collection </param>
+        /// <returns> maximum for each batch </returns>
         public static IEnumerable<T> BatchMaxFloating<T>(this IEnumerable<IEnumerable<T>> input)
             where T : struct, IFloatingPointIeee754<T>
         {

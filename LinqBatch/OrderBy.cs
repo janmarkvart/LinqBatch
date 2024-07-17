@@ -13,7 +13,7 @@ namespace LinqBatch
         /// <typeparam name="TKey"> generic type of key to order by </typeparam>
         /// <param name="input"> input collection </param>
         /// <param name="keySelector"> delegate retrieving desired key from T </param>
-        /// <returns> ordered inner collections </returns>
+        /// <returns> batches of ordered elements </returns>
         public static IEnumerable<IOrderedEnumerable<T>> OrderBatchesBy<T, TKey>(this IEnumerable<IEnumerable<T>> input, Func<T, TKey> keySelector)
         {
             foreach (var item in input)
@@ -30,7 +30,7 @@ namespace LinqBatch
         /// <param name="input"> input collection </param>
         /// <param name="keySelector"> delegate retrieving desired key from T </param>
         /// <param name="comparer"> custom comparison </param>
-        /// <returns> ordered inner collections </returns>
+        /// <returns> batches of ordered elements </returns>
         public static IEnumerable<IOrderedEnumerable<T>> OrderBatchesBy<T, TKey>(this IEnumerable<IEnumerable<T>> input, Func<T, TKey> keySelector, IComparer<TKey> comparer)
         {
             foreach (var item in input)
