@@ -106,3 +106,14 @@ Příklad:
 Argumenty: jagged kolekce `IEnumerable<IEnumerable<T>>`, selector klíče podle kterého setřídíme, `vlastní IComparer<T>`
 Návratový typ: `IEnumerable<IEnumerable<T>>`
 Podobně jako první varianta, ke třízení používáme dodaný `IComparer<T>`
+
+### Konverze
+#### BatchesToArray
+Argumenty: jagged kolekce `IEnumerable<IEnumerable<T>>`
+Návratový typ: `T[]`
+převede kolekci na 1D pole.
+
+#### BatchesToList
+Argumenty: jagged kolekce `IEnumerable<IEnumerable<T>>`
+Návratový typ: `IList<T>`
+Převede kolekci na 1D `List<T>`.

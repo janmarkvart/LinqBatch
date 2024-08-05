@@ -37,9 +37,9 @@ namespace LinqBatchTests
         public void TestIntSimple()
         {
             int[][] expected = [[1, 3, 10], [-6, -2, 5]];
-            var res = intBatches.OrderBatchesBy(x => x);
+            var res = intBatches.BatchOrderBy(x => x);
             Assert.That(res, Is.EqualTo(expected));
-            var res2 = listIntBatches.OrderBatchesBy(x => x);
+            var res2 = listIntBatches.BatchOrderBy(x => x);
             Assert.That(res2, Is.EqualTo(expected));
         }
 
@@ -47,14 +47,14 @@ namespace LinqBatchTests
         public void TestStringSimple()
         {
             string[][] expected = [["apple", "orange", "pear"], ["bike", "car", "train"]];
-            var res = stringBatches.OrderBatchesBy(x => x);
+            var res = stringBatches.BatchOrderBy(x => x);
             int i = 0;
             foreach (var s in res)
             {
                 Assert.That(s, Is.EqualTo(expected[i]));
                 i++;
             }
-            var res2 = listStringBatches.OrderBatchesBy(x => x);
+            var res2 = listStringBatches.BatchOrderBy(x => x);
             i = 0;
             foreach (var s in res2)
             {
@@ -67,7 +67,7 @@ namespace LinqBatchTests
         public void TestEmptyBatches()
         {
             int[][] expected = [[], []];
-            var res = emptyBatches.OrderBatchesBy(x => x);
+            var res = emptyBatches.BatchOrderBy(x => x);
             Assert.That(res, Is.EqualTo(expected));
         }
 
@@ -75,7 +75,7 @@ namespace LinqBatchTests
         public void TestEmptyTopArray()
         {
             string[][] expected = [];
-            var res = emptyTopArray.OrderBatchesBy(x => x);
+            var res = emptyTopArray.BatchOrderBy(x => x);
             Assert.That(res, Is.EquivalentTo(expected));
         }
     }

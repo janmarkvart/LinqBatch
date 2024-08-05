@@ -13,7 +13,7 @@ namespace LinqBatch
         /// <param name="count"> count of how many items to get </param>
         /// <returns> Enumerable of batches 
         /// containing all elements except first *count* </returns>
-        public static IEnumerable<T[]> SkipBatch<T>(this IEnumerable<IEnumerable<T>> input, int count)
+        public static IEnumerable<T[]> BatchSkip<T>(this IEnumerable<IEnumerable<T>> input, int count)
         {
             foreach (var item in input)
             {

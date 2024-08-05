@@ -46,6 +46,7 @@ Příklad:
     var resultMin = example.BatchMin(); // = (1, -2)
     var resultMax = example.BatchMax(); // = (7, 0)
 ```
+- Interně se obě varianty dále dělí na metody Batch(Min/Max)Binary a Batch(Min/Max)Floating, které zpracovávají celočíselné a floating point varianty operací.
 
 ### TotalMin/Max
 Argumenty: `IEnumerable<IEnumerable<T>> input`
@@ -57,6 +58,7 @@ Příklad:
     var resultMin = example.TotalMin(); // = -2
     var resultMax = example.TotalMax(); // = 7
 ```
+- Interně se obě varianty dále dělí na metody Total(Min/Max)Binary a Total(Min/Max)Floating, které zpracovávají celočíselné a floating point varianty operací.
 
 ### BatchSum/TotalSum
 Argumenty: `IEnumerable<IEnumerable<T>> input`
@@ -68,6 +70,7 @@ Příklad:
     var sums = example.BatchSum();     // = (13, 0)
     var sumTotal = example.TotalSum(); // = 13
 ```
+- Interně se obě varianty dále dělí na metody (Batch/Total)SumBinary a (Batch/Total)SumFloating, které zpracovávají celočíselné a floating point varianty operací.
 
 ### BatchAverage/TotalAverage
 Argumenty: `IEnumerable<IEnumerable<T>> input`
@@ -80,6 +83,7 @@ Příklad:
     var avgs = example.BatchAverage();     // = (4, 0)
     var avgTotal = example.TotalAverage(); // = 3
 ```
+- Interně se obě varianty dále dělí na metody (Batch/Total)AverageBinary a (Batch/Total)AverageFloating, které zpracovávají celočíselné a floating point varianty operací.
 
 ### BatchTake/BatchSkip
 Argumenty: `IEnumerable<IEnumerable<T>> input`, `int count`
@@ -109,3 +113,14 @@ Příklad:
 Argumenty: `IEnumerable<IEnumerable<T>> input`, `Func<T, TKey> keySelector`, `IComparer<TKey> comparer`
 Návratový typ: `IEnumerable<IEnumerable<T>>`
 Podobně jako první varianta, ke třízení používáme dodaný `IComparer<T>`
+
+### Konverze
+#### BatchesToArray
+Argumenty: `IEnumerable<IEnumerable<T>> input`
+Návratový typ: `T[]`
+převede kolekci na 1D pole.
+
+#### BatchesToList
+Argumenty: `IEnumerable<IEnumerable<T>> input`
+Návratový typ: `IList<T>`
+Převede kolekci na 1D `List<T>`.

@@ -13,7 +13,7 @@ namespace LinqBatch
         /// <param name="count"> count of how many items to get </param>
         /// <returns> Enumerable of batches 
         /// containing first *count* elements per batch </returns>
-        public static IEnumerable<T[]> TakeBatch<T>(this IEnumerable<IEnumerable<T>> input, int count)
+        public static IEnumerable<T[]> BatchTake<T>(this IEnumerable<IEnumerable<T>> input, int count)
         {
             foreach (var item in input)
             {

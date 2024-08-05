@@ -35,7 +35,7 @@ namespace LinqBatchTests
             int[] newa = [1,2,3,4];
             int[] newb = [4,5,6];
             int[][] expected = [newa, newb];
-            var res = intBatches.TakeBatch(4);
+            var res = intBatches.BatchTake(4);
             Assert.That(res, Is.EqualTo(expected));
         }
 
@@ -45,7 +45,7 @@ namespace LinqBatchTests
             int[] newa = [1, 2, 3, 4];
             int[] newb = [4, 5, 6];
             int[][] expected = [newa, newb];
-            var res = listIntBatches.TakeBatch(4);
+            var res = listIntBatches.BatchTake(4);
             Assert.That(res, Is.EqualTo(expected));
         }
 
@@ -53,7 +53,7 @@ namespace LinqBatchTests
         public void TestStringSimple()
         {
             string[][] expected = [["apple", "orange"],["train"]];
-            var res = stringBatches.TakeBatch(2);
+            var res = stringBatches.BatchTake(2);
             int i = 0;
             foreach(var batch in res)
             {
@@ -65,14 +65,14 @@ namespace LinqBatchTests
         [Test]
         public void TestEmptyBatches()
         {
-            var res = emptyBatches.TakeBatch(10);
+            var res = emptyBatches.BatchTake(10);
             Assert.That(res, Is.EqualTo(emptyBatches));
         }
 
         [Test]
         public void TestEmptyTopArray()
         {
-            var res = emptyTopArray.TakeBatch(5);
+            var res = emptyTopArray.BatchTake(5);
             Assert.That(res, Is.EqualTo(emptyTopArray));
         }
     }
