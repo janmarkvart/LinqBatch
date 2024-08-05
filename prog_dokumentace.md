@@ -1,17 +1,17 @@
 # LinqBatch - programátorská dokumentace
 
 ## Úvod a motivace
-LinqBatch vznikl jako snaha rozšířit běžné Linq operace o funkcinalitu nad jagged arrays `[][]`. 
-BatchLinq obsahuje podmnožinu nejběžnějších Linq operací nad jagged poli `[][]`. 
-Základní myšlenka je provádět operace nad individuálními vnitřními poli, chápanými jako batches dat.
+LinqBatch vznikl jako snaha rozšířit běžné Linq operace o funkcinalitu nad jagged kolekcemi jako `[][]`. 
+BatchLinq obsahuje podmnožinu nejběžnějších Linq operací nad jagged kolekcemi. 
+Základní myšlenka je provádět operace nad individuálními vnitřními kolekcemi, chápanými jako batches dat.
 
 ## Popis operací
-Všechny BatchLinq operace jsou pojmenovány stejně jako jejich běžné protějšky na 1D kolekcích,
-s přidaným prefixem Batch (tedy `BatchSelect, BatchWhere, BatchMin/Max...`).
+Všechny BatchLinq operace s výjimkou `Select` a `Where` jsou pojmenovány stejně jako jejich běžné protějšky na 1D kolekcích,
+s přidaným prefixem `Batch` (tedy `BatchOrderBy`, `BatchTake`, `BatchMin/Max...`).
 Hlavní důvod za touto změnou v názvu je častý konflikt s existujícími Linq operacemi.
-Jako důsledek všechny operace podporují jen Fluent Syntax, a ne query expressions.
+Operace Min, Max, Sum a Average podporují i operaci nad celou jagged kolekcí, s prefixem `Total` (`TotalMin`, `TotalSum`...).
 
-### BatchSelect
+### Select
 Argumenty: `IEnumerable<IEnumerable<T>> input`, `Func<T, R> selector`
 Návratový typ: `IEnumerable<R[]>`
 Operace provádí iteraci nad vnějšíí `IEnumerable` a pro každý získaný Batch provádí selekci 
@@ -19,10 +19,12 @@ do `IList<T>`, obdobně jako bychom volali ručně klasický `Select` pro každ�
 Příklad:
 ```cs
     string[][] example = [["apple","pear"]["banana"]];
-    var result = example.BatchSelect(x => x.Length); // = ((5,4),(6))
+    var result = example.Select(x => x.Length); // = ((5,4),(6))
+    //operace Select funguje i jako query expression
+    var result2 = from x in example select x.Length; // = ((5,4),(6))
 ```
 
-### BatchWhere
+### Where
 Argumenty: `IEnumerable<IEnumerable<T>> input`, `Func<T, bool> condition`
 Návratový typ: `IEnumerable<IEnumerable<T>>`
 Operace Where provede iteraci nad vnější kolekcí, a pro každý batch vytvoří `IList<T>` prvků splňující podmínku.
@@ -30,6 +32,8 @@ Příklad:
 ```cs
     string[][] example = [["apple","pear"]["banana"]];
     var result = example.Where(x => x.Length > 4); // = (("apple"),("banana"))
+    //operace Where funguje i jako query expression
+    var result2 = from x in example where x.Length > 4 select x; // = (("apple"),("banana"))
 ```
 
 ### BatchMin/Max
@@ -55,7 +59,7 @@ Příklad:
 ```
 
 ### BatchSum/TotalSum
-Argumenty: jagged kolekce
+Argumenty: `IEnumerable<IEnumerable<T>> input`
 Návratový typ: `IEnumerable<T>` pro Batch, `T` pro Total
 Spočítá sumu číselných typů napříč každým batchem/celou jagged kolekcí.
 Příklad:
@@ -66,9 +70,10 @@ Příklad:
 ```
 
 ### BatchAverage/TotalAverage
-Argumenty: jagged kolekce
+Argumenty: `IEnumerable<IEnumerable<T>> input`
 Návratový typ: `IEnumerable<T>` pro Batch, `T` pro Total
 Spočítá průměr číselných typů napříč každým batchem/celou jagged kolekcí.
+**Důležité**: návratový typ je stejný jako vstupní, tudíž průměr celých čísel bude opět celé čísto!
 Příklad:
 ```cs
     int[][] example = [[1,5,7][0]];
@@ -77,7 +82,7 @@ Příklad:
 ```
 
 ### BatchTake/BatchSkip
-Argumenty: jagged kolekce, celočíselný počet
+Argumenty: `IEnumerable<IEnumerable<T>> input`, `int count`
 Návratový typ: `IEnumerable<IEnumerable<T>>`
 Operace Take získá (maximálně) prvních n prvků v každém batchi.
 Operace Skip naopak přeskočí prvních n prvků a získá zbytek.
@@ -89,8 +94,9 @@ Příklad:
 ```
 
 ### BatchOrderBy
-2 varianty
-Argumenty: jagged kolekce, selector klíče podle kterého setřídíme
+2 varianty:
+#### Varianta 1 - defaultní comparer
+Argumenty: `IEnumerable<IEnumerable<T>> input`, `Func<T, TKey> keySelector`
 Návratový typ: `IEnumerable<IEnumerable<T>>`
 Operace setřídí každý batch podle dodaného selektoru, kterým zaměříme klíč k setřízení.
 Příklad:
@@ -99,7 +105,7 @@ Příklad:
     var orderedByAplhabet = example.BatchOrderBy(x => x);        // = (("apple","banana","pear"),("bike","car","train"))
     var orderedByLength   = example.BatchOrderBy(x => x.Length); // = (("pear","apple","banana"),("car","bike","train"))
 ```
-
-Argumenty: jagged kolekce, selector klíče podle kterého setřídíme, `vlastní IComparer<T>`
+#### Varianta 2 - custom comparer
+Argumenty: `IEnumerable<IEnumerable<T>> input`, `Func<T, TKey> keySelector`, `IComparer<TKey> comparer`
 Návratový typ: `IEnumerable<IEnumerable<T>>`
 Podobně jako první varianta, ke třízení používáme dodaný `IComparer<T>`
